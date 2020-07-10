@@ -17,7 +17,7 @@ export const Header = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar color="primary" expand="md">
+    <Navbar color="default" expand="md" className="py-4">
       <Container fluid>
         <NavbarBrand href="/">BLACK OWNED</NavbarBrand>
         <NavbarToggler onClick={toggle} />
