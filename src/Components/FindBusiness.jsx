@@ -17,7 +17,7 @@ const Placeholder = styled.p`
 `;
 
 const StyledCol = styled(Col)`
-  max-width: 450px;
+  max-width: 500px;
 `;
 
 export const FindBusiness = () => {
@@ -31,15 +31,15 @@ export const FindBusiness = () => {
       {/* TODO */}
       {/* <BusinessCard name, rating, category, knownfor, image /> */}
       <Container fluid style={{ marginTop: "-4em" }}>
-        <Row className="justify-content-center">
+        <Row xs={1} sm={3} className="justify-content-center">
           <StyledCol>
-            <BusinessCard />
+            <BusinessCard rating={8} ratingCount={10} />
           </StyledCol>
           <StyledCol>
-            <BusinessCard />
+            <BusinessCard rating={4} ratingCount={100} />
           </StyledCol>
           <StyledCol>
-            <BusinessCard />
+            <BusinessCard rating={3} ratingCount="10k" />
           </StyledCol>
         </Row>
       </Container>
