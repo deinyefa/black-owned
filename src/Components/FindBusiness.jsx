@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { BusinessCard } from "./BusinessCard";
 
 const SearchFilter = styled.div`
@@ -16,6 +16,10 @@ const Placeholder = styled.p`
   padding-bottom: 5px;
 `;
 
+const StyledCol = styled(Col)`
+  max-width: 450px;
+`;
+
 export const FindBusiness = () => {
   return (
     <>
@@ -26,17 +30,17 @@ export const FindBusiness = () => {
       </SearchFilter>
       {/* TODO */}
       {/* <BusinessCard name, rating, category, knownfor, image /> */}
-      <Container>
-        <Row>
-          <Col>
+      <Container fluid style={{ marginTop: "-4em" }}>
+        <Row className="justify-content-center">
+          <StyledCol>
             <BusinessCard />
-          </Col>
-          <Col>
+          </StyledCol>
+          <StyledCol>
             <BusinessCard />
-          </Col>
-          <Col>
+          </StyledCol>
+          <StyledCol>
             <BusinessCard />
-          </Col>
+          </StyledCol>
         </Row>
       </Container>
     </>

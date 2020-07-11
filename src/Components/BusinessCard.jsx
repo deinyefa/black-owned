@@ -1,26 +1,31 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Card as BSCard } from "reactstrap";
+import { Card } from "react-bootstrap";
 
-const StyledBusinessCard = styled(BSCard)`
+const StyledBusinessCard = styled(Card)`
   &::before {
     content: "";
     width: calc(100% + 20px);
-    height: 150px;
+    height: 200px;
     border-bottom-right-radius: 80px;
-    transform: rotate(10deg) translate(-11px, -14px);
-    background-color: red;
+    transform: rotate(10deg) translate(-20px, -37px);
+    background: linear-gradient(45deg, teal, green);
   }
 `;
 
 export const BusinessCard = () => {
   return (
-    <div
+    <article
       style={{
         overflow: "hidden",
       }}
     >
-      <StyledBusinessCard>This is a card</StyledBusinessCard>
-    </div>
+      <StyledBusinessCard>
+        <Card.Body>
+          <Card.Title>Business Name</Card.Title>
+          <Card.Text>Affordable</Card.Text>
+        </Card.Body>
+      </StyledBusinessCard>
+    </article>
   );
 };
