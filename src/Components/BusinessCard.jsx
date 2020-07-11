@@ -13,7 +13,7 @@ const StyledBusinessCard = styled(BSCard)`
   }
 `;
 
-export const Card = () => {
+export const BusinessCard = () => {
   return (
     <div
       style={{
