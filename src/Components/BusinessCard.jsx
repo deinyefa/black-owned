@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Badge, Card } from "react-bootstrap";
 import { ScoreThermometer } from "./UI";
 
 const StyledBusinessCard = styled(Card)`
@@ -16,6 +16,7 @@ const StyledBusinessCard = styled(Card)`
 `;
 
 const StyledArticle = styled.article`
+  margin-bottom: 3em;
   overflow: hidden;
   transition: all ease 0.3s;
 
@@ -26,19 +27,34 @@ const StyledArticle = styled.article`
   }
 `;
 
-export const BusinessCard = ({ rating, ratingCount }) => {
+export const BusinessCard = ({
+  rating,
+  ratingCount,
+  name,
+  category,
+  knownFor,
+  id,
+}) => {
   return (
     <StyledArticle
-      onClick={() => console.log("clicked a card")}
+      onClick={() => console.log("clicked a card", id)}
       className="shadow"
     >
       <StyledBusinessCard>
-        <Card.Body className="d-flex justify-content-between">
-          <div>
-            <Card.Title>Business Name</Card.Title>
-            <Card.Text className="text-primary">Affordable</Card.Text>
+        <Card.Body
+          className="d-flex justify-content-between pt-0"
+          style={{ marginTop: "-1em" }}
+        >
+          <div className="pr-1">
+            <Card.Title>{name}</Card.Title>
+            <Card.Text className="text-primary">{knownFor}</Card.Text>
+            <Card.Text>
+              <Badge variant="info" style={{ textTransform: "uppercase" }}>
+                {category}
+              </Badge>
+            </Card.Text>
           </div>
-          <div style={{ width: "150px" }}>
+          <div style={{ width: "100px" }}>
             <ScoreThermometer score={rating} ratingCount={ratingCount} />
           </div>
         </Card.Body>
@@ -50,4 +66,7 @@ export const BusinessCard = ({ rating, ratingCount }) => {
 BusinessCard.propTypes = {
   rating: PropTypes.number.isRequired,
   ratingCount: PropTypes.any.isRequired,
+  name: PropTypes.string,
+  knownFor: PropTypes.string,
+  category: PropTypes.string,
 };

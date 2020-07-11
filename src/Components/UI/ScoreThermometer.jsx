@@ -7,7 +7,7 @@ export const ScoreThermometer = ({ score, ratingCount }) => {
 
   return (
     <>
-      <p>
+      <p className="text-right">
         <strong>{score}/10</strong> ({ratingCount})
       </p>
       <ProgressBar

@@ -20,6 +20,38 @@ const StyledCol = styled(Col)`
   max-width: 500px;
 `;
 
+const businesses = [
+  {
+    name: "Business 1",
+    rating: 8,
+    ratingCount: "12",
+    knownFor: ["Quality Product", "Sweet Packaging"],
+    category: "Clothing",
+  },
+  {
+    name: "Business 3",
+    rating: 6,
+    ratingCount: "12",
+    knownFor: ["On-time delivery"],
+    category: "Fashion",
+  },
+  {
+    name: "Business 2",
+    rating: 3,
+    ratingCount: "12",
+    knownFor: ["Sweet Packaging"],
+    category: "Beauty",
+  },
+  {
+    name: "Business 5",
+    rating: 7,
+    ratingCount: "12k",
+    knownFor: ["Sweet Packaging"],
+    category: "Skin care",
+    // image: ""
+  },
+];
+
 export const FindBusiness = () => {
   return (
     <>
@@ -28,19 +60,20 @@ export const FindBusiness = () => {
           <em>Find black-owned businesses</em>
         </Placeholder>
       </SearchFilter>
-      {/* TODO */}
-      {/* <BusinessCard name, rating, category, knownfor, image /> */}
-      <Container fluid style={{ marginTop: "-4em" }}>
-        <Row xs={1} sm={3} className="justify-content-center">
-          <StyledCol>
-            <BusinessCard rating={8} ratingCount={10} />
-          </StyledCol>
-          <StyledCol>
-            <BusinessCard rating={4} ratingCount={100} />
-          </StyledCol>
-          <StyledCol>
-            <BusinessCard rating={3} ratingCount="10k" />
-          </StyledCol>
+      <Container style={{ marginTop: "-4em" }}>
+        <Row xs={1} sm={3} xl={4}>
+          {businesses.map((business, idx) => (
+            <StyledCol key={idx}>
+              <BusinessCard
+                name={business.name}
+                rating={business.rating}
+                ratingCount={business.ratingCount}
+                knownFor={business.knownFor[0]}
+                category={business.category}
+                id={idx}
+              />
+            </StyledCol>
+          ))}
         </Row>
       </Container>
     </>
