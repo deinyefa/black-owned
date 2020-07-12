@@ -4,11 +4,11 @@ import { Button, Nav, Navbar } from "react-bootstrap";
 export const Header = () => {
   return (
     <Navbar
-      color="default"
+      color="primary"
       expand="md"
       className="py-4"
       variant="dark"
-      bg="default"
+      bg="primary"
     >
       <Navbar.Brand href="/">BLACK OWNED</Navbar.Brand>
       <Navbar.Toggle aria-controls="main-navbar" />

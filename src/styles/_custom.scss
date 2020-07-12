@@ -1,21 +1,25 @@
 // https://coolors.co/542c10-99582a-38200f-2e251f-020100
 $theme-colors: (
-  "default": #020100,
-  "primary": #38200f,
-  "secondary": #fffce8,
-  "info": #eec584,
-  "warning": #99582a,
-  "danger": #542c10,
+  "default": #35261b,
+  "primary": #d1bda3,
+  "secondary": #eae4dd,
+  "info": #865b40,
+  "warning": #f3a25f,
+  "danger": #de676f,
 );
 
 @import "~bootstrap/scss/bootstrap";
 
 .navbar a {
-  color: #fffce8;
+  color: #eae4dd;
 }
 
 a {
   transition: all ease 0.3s;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }
 
 h1,
@@ -35,4 +39,5 @@ h6,
 
 body {
   font-family: "Montserrat", sans-serif;
+  color: #35261b;
 }

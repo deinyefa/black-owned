@@ -7,7 +7,6 @@ import BusinessDetails from "./BusinessDetails";
 
 const SearchFilter = styled.div`
   padding: 5em 0 8em;
-  background: #020100;
 `;
 
 const Placeholder = styled.p`
@@ -43,13 +42,13 @@ export const FindBusiness = () => {
 
   return (
     <>
-      <SearchFilter>
+      <SearchFilter className="bg-primary">
         <Placeholder>
           <em>Find black-owned businesses</em>
         </Placeholder>
       </SearchFilter>
       <Container style={{ marginTop: "-4em" }}>
-        <Row xs={1} sm={3} xl={4}>
+        <Row xs={1} sm={2} md={3} xl={4}>
           {/* TODO: Extract this into another compnent <BusinessList/> */}
           {businesses?.length &&
             businesses.map((business) => {

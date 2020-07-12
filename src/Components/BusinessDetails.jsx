@@ -26,7 +26,7 @@ const SmallerAsset = styled.div`
   background: linear-gradient(45deg, tan, yellow);
 `;
 
-const SmallCircle = styled.div`
+const SmallCircle = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 50px;
@@ -92,12 +92,17 @@ export default () => {
               <p>Sweet Packaging</p>
             </div>
             <hr />
-            <Card className="d-flex" as="a" href="http://www.google.com">
-              <SmallCircle />
-              <div>
+            <Card
+              className="d-flex flex-row justify-content-around"
+              as="a"
+              href="http://www.google.com"
+              target="_blank"
+            >
+              <SmallCircle className="align-self-center" />
+              <span>
                 <span>Website</span>
-                <p className="text-muted">example.com</p>
-              </div>
+                <span className="text-muted d-block">example.com</span>
+              </span>
             </Card>
             <hr />
             <h3 className="text-uppercase text-muted h6 my-3">
