@@ -3,9 +3,12 @@ import React from "react";
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
 import {
   IconConfused,
+  IconFacebook,
   IconHappy,
+  IconInstagram,
   IconSad,
   IconSmile,
+  IconTwitter,
   IconVerySad,
 } from "../icons";
 import RelatedBusinesses from "./RelatedBusinesses";
@@ -117,13 +120,9 @@ export default () => {
                 ultricies mi.
               </p>
               <div className="d-flex">
-                <Badge variant="info" className="mr-2">
-                  Facebook
-                </Badge>
-                <Badge variant="default" className="mr-2">
-                  Instagram
-                </Badge>
-                <Badge variant="primary">Twitter</Badge>
+                <FlatIcon icon={<IconFacebook width={30} />} />
+                <FlatIcon icon={<IconInstagram width={30} />} />
+                <FlatIcon icon={<IconTwitter width={30} />} />
               </div>
             </Card>
           </Col>
