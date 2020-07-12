@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Modal, Row } from "react-bootstrap";
 import * as FirestoreService from "../services/firestore";
-import { BusinessCard } from "./BusinessCard";
+import BusinessCard from "./BusinessCard";
+import BusinessDetails from "./BusinessDetails";
 
 const SearchFilter = styled.div`
   padding: 5em 0 8em;
@@ -23,6 +24,7 @@ const StyledCol = styled(Col)`
 
 export const FindBusiness = () => {
   const [businesses, setBusinesses] = useState();
+  const [openDetails, setOpenDetails] = useState(false);
 
   useEffect(() => {
     const getBusinesses = () => {
@@ -48,6 +50,7 @@ export const FindBusiness = () => {
       </SearchFilter>
       <Container style={{ marginTop: "-4em" }}>
         <Row xs={1} sm={3} xl={4}>
+          {/* TODO: Extract this into another compnent <BusinessList/> */}
           {businesses?.length &&
             businesses.map((business) => {
               const mostKnownFor = business.knownFor.reduce((prev, current) =>
@@ -57,18 +60,33 @@ export const FindBusiness = () => {
               return (
                 <StyledCol key={business.uid}>
                   <BusinessCard
+                    onClick={() => setOpenDetails(true)}
                     name={business.name}
                     rating={business.rating}
                     ratingCount={business.ratingCount}
                     knownFor={mostKnownFor.value}
                     category={business.category}
-                    id={business.uid}
                   />
                 </StyledCol>
               );
             })}
         </Row>
       </Container>
+      <Modal show={openDetails} onHide={() => setOpenDetails(false)} size="xl">
+        <Modal.Header closeButton className="border-bottom-0" />
+        <Modal.Body>
+          <BusinessDetails />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
+
+/**
+ * To view business details
+ * 1. Click business
+ * 2. Update url with business uid
+ * 3. This should trigger modal to open
+ *      - this way you can navigate back and forth in the browser
+ * 4. Send request to firebase to pull more information
+ */
