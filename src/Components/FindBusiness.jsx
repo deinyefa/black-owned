@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import * as FirestoreService from "../services/firestore";
 import { BusinessCard } from "./BusinessCard";
 
 const SearchFilter = styled.div`
@@ -20,39 +21,24 @@ const StyledCol = styled(Col)`
   max-width: 500px;
 `;
 
-const businesses = [
-  {
-    name: "Business 1",
-    rating: 8,
-    ratingCount: "12",
-    knownFor: ["Quality Product", "Sweet Packaging"],
-    category: "Clothing",
-  },
-  {
-    name: "Business 3",
-    rating: 6,
-    ratingCount: "12",
-    knownFor: ["On-time delivery"],
-    category: "Fashion",
-  },
-  {
-    name: "Business 2",
-    rating: 3,
-    ratingCount: "12",
-    knownFor: ["Sweet Packaging"],
-    category: "Beauty",
-  },
-  {
-    name: "Business 5",
-    rating: 7,
-    ratingCount: "12k",
-    knownFor: ["Sweet Packaging"],
-    category: "Skin care",
-    // image: ""
-  },
-];
-
 export const FindBusiness = () => {
+  const [businesses, setBusinesses] = useState();
+
+  useEffect(() => {
+    const getBusinesses = () => {
+      FirestoreService.getBusinesses("businesses")
+        .then((querySnapshot) => {
+          let data = [];
+          querySnapshot.forEach((doc) => {
+            data.push({ uid: doc.id, ...doc.data() });
+          });
+          setBusinesses(data);
+        })
+        .catch(() => "Error getting list");
+    };
+    getBusinesses();
+  }, []);
+
   return (
     <>
       <SearchFilter>
@@ -62,18 +48,25 @@ export const FindBusiness = () => {
       </SearchFilter>
       <Container style={{ marginTop: "-4em" }}>
         <Row xs={1} sm={3} xl={4}>
-          {businesses.map((business, idx) => (
-            <StyledCol key={idx}>
-              <BusinessCard
-                name={business.name}
-                rating={business.rating}
-                ratingCount={business.ratingCount}
-                knownFor={business.knownFor[0]}
-                category={business.category}
-                id={idx}
-              />
-            </StyledCol>
-          ))}
+          {businesses?.length &&
+            businesses.map((business) => {
+              const mostKnownFor = business.knownFor.reduce((prev, current) =>
+                prev.y > current.y ? prev : current
+              );
+
+              return (
+                <StyledCol key={business.uid}>
+                  <BusinessCard
+                    name={business.name}
+                    rating={business.rating}
+                    ratingCount={business.ratingCount}
+                    knownFor={mostKnownFor.value}
+                    category={business.category}
+                    id={business.uid}
+                  />
+                </StyledCol>
+              );
+            })}
         </Row>
       </Container>
     </>
