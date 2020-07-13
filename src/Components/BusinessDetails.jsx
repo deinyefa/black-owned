@@ -1,18 +1,14 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
+import { IconFacebook, IconInstagram, IconTwitter } from "../icons";
+import { FlatIcon } from "./UI";
 import {
-  IconConfused,
-  IconFacebook,
-  IconHappy,
-  IconInstagram,
-  IconSad,
-  IconSmile,
-  IconTwitter,
-  IconVerySad,
-} from "../icons";
-import RelatedBusinesses from "./RelatedBusinesses";
-import { FlatIcon, ScoreThermometer } from "./UI";
+  BusinessKnownFor,
+  BusinessRating,
+  BusinessWebsite,
+  RelatedBusinessList,
+} from "./UI/Business";
 
 const StyledIcon = styled.div`
   max-width: 150px;
@@ -36,51 +32,11 @@ const SmallerAsset = styled.div`
   background: linear-gradient(45deg, tan, yellow);
 `;
 
-const SmallCircle = styled.span`
-  width: 20px;
-  height: 20px;
-  border-radius: 50px;
-  background: linear-gradient(45deg, teal, green);
+const StyledHR = styled.hr`
+  margin: 3rem 0;
 `;
 
 export default () => {
-  const iconList = [
-    <IconVerySad />,
-    <IconSad />,
-    <IconConfused />,
-    <IconSmile />,
-    <IconHappy />,
-  ];
-  const iconHTML = (list, rating) => {
-    let mood;
-    switch (Math.round(rating)) {
-      case 1 || 2:
-        mood = 0;
-        break;
-      case 3 || 4:
-        mood = 1;
-        break;
-      case 5 || 6:
-        mood = 2;
-        break;
-      case 7 || 8:
-        mood = 3;
-        break;
-      case 9 || 10:
-        mood = 4;
-        break;
-      default:
-        break;
-    }
-    return list.map((item, idx) => (
-      <FlatIcon
-        key={idx}
-        style={{ opacity: mood === idx ? "1" : "0.5" }}
-        icon={item}
-      />
-    ));
-  };
-
   return (
     <>
       <Container>
@@ -110,7 +66,7 @@ export default () => {
                   <SmallerAsset key={el} />
                 ))}
               </div>
-              <hr />
+              <StyledHR />
               <p>
                 libero nunc consequat interdum varius sit amet mattis vulputate
                 enim nulla aliquet porttitor lacus luctus accumsan tortor
@@ -126,41 +82,14 @@ export default () => {
               </div>
             </Card>
           </Col>
-          <Col lg="3" className="mt-lg-0 mt-sm-4">
-            <div className="d-flex justify-content-center mb-1">
-              {iconHTML(iconList, 5)}
-            </div>
-            <ScoreThermometer score={5} ratingCount={20} />
-            <h3 className="text-uppercase text-muted h6 mt-4 mb-3">
-              Known for
-            </h3>
-            <div>
-              <p>Quality Products</p>
-              <p>Fast Delivery</p>
-              <p>Sweet Packaging</p>
-            </div>
-            <hr />
-            <Card
-              className="d-flex flex-row justify-content-around"
-              as="a"
-              href="http://www.google.com"
-              target="_blank"
-            >
-              <SmallCircle className="align-self-center" />
-              <span>
-                <span>Website</span>
-                <span className="text-muted d-block">example.com</span>
-              </span>
-            </Card>
-            <hr />
-            <h3 className="text-uppercase text-muted h6 my-3">
-              Related Businesses
-            </h3>
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
+          <Col lg="3" className="mt-lg-0 mt-sm-5">
+            <BusinessRating />
+            <StyledHR />
+            <BusinessKnownFor />
+            <StyledHR />
+            <BusinessWebsite />
+            <StyledHR />
+            <RelatedBusinessList />
           </Col>
         </Row>
       </Container>
