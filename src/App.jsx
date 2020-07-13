@@ -1,12 +1,13 @@
 import React from "react";
 import { FindBusiness } from "./Components";
-import { Header } from "./Components/UI";
+import { Footer, Header } from "./Components/UI";
 
 function App() {
   return (
     <>
       <Header />
       <FindBusiness />
+      <Footer />
     </>
   );
 }
