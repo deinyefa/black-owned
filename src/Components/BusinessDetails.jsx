@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
-import RelatedBusinesses from "./RelatedBusinesses";
-import { ScoreThermometer } from "./UI";
+import { IconFacebook, IconInstagram, IconTwitter } from "../icons";
+import {
+  BusinessKnownFor,
+  BusinessRating,
+  BusinessWebsite,
+  RelatedBusinessList,
+} from "./Business";
+import { FlatIcon } from "./UI";
 
 const StyledIcon = styled.div`
   max-width: 150px;
@@ -26,11 +32,8 @@ const SmallerAsset = styled.div`
   background: linear-gradient(45deg, tan, yellow);
 `;
 
-const SmallCircle = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50px;
-  background: linear-gradient(45deg, teal, green);
+const StyledHR = styled.hr`
+  margin: 3rem 0;
 `;
 
 export default () => {
@@ -60,10 +63,10 @@ export default () => {
               <MainAsset />
               <div className="d-flex">
                 {[1, 2, 3, 4].map((el) => (
-                  <SmallerAsset />
+                  <SmallerAsset key={el} />
                 ))}
               </div>
-              <hr />
+              <StyledHR />
               <p>
                 libero nunc consequat interdum varius sit amet mattis vulputate
                 enim nulla aliquet porttitor lacus luctus accumsan tortor
@@ -73,41 +76,20 @@ export default () => {
                 ultricies mi.
               </p>
               <div className="d-flex">
-                <Badge variant="info" className="mr-2">
-                  Facebook
-                </Badge>
-                <Badge variant="default" className="mr-2">
-                  Instagram
-                </Badge>
-                <Badge variant="primary">Twitter</Badge>
+                <FlatIcon icon={<IconFacebook width={30} />} />
+                <FlatIcon icon={<IconInstagram width={30} />} />
+                <FlatIcon icon={<IconTwitter width={30} />} />
               </div>
             </Card>
           </Col>
-          <Col lg="3" className="mt-lg-0 mt-sm-4">
-            <ScoreThermometer score={5} ratingCount={20} />
-            <h3 className="text-uppercase text-muted h6 my-3">Known for</h3>
-            <div>
-              <p>Quality Products</p>
-              <p>Fast Delivery</p>
-              <p>Sweet Packaging</p>
-            </div>
-            <hr />
-            <Card className="d-flex" as="a" href="http://www.google.com">
-              <SmallCircle />
-              <div>
-                <span>Website</span>
-                <p className="text-muted">example.com</p>
-              </div>
-            </Card>
-            <hr />
-            <h3 className="text-uppercase text-muted h6 my-3">
-              Related Businesses
-            </h3>
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
-            <RelatedBusinesses />
+          <Col lg="3" className="mt-lg-0 mt-sm-5">
+            <BusinessRating />
+            <StyledHR />
+            <BusinessKnownFor />
+            <StyledHR />
+            <BusinessWebsite />
+            <StyledHR />
+            <RelatedBusinessList />
           </Col>
         </Row>
       </Container>

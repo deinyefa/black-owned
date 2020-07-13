@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { ScoreThermometer } from "./UI";
+import { ScoreThermometer } from "../UI";
 
 const Icon = styled.div`
   background: linear-gradient(45deg, tan, yellow);
