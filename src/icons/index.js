@@ -1,3 +1,5 @@
+import IconChevronRight from "./icon-chevron";
+import IconWebsite from "./icon-commerce-and-shopping";
 import IconConfused from "./icon-confused";
 import IconDiamond from "./icon-diamond";
 import IconFacebook from "./icon-facebook";
@@ -26,4 +28,6 @@ export {
   IconSalad,
   IconShoppingBag,
   IconShoppingBagTime,
+  IconWebsite,
+  IconChevronRight,
 };
