@@ -5,8 +5,8 @@ import {
   IconSad,
   IconSmile,
   IconVerySad,
-} from "../../../icons";
-import { FlatIcon, ScoreThermometer } from "../../UI";
+} from "../../icons";
+import { FlatIcon, ScoreThermometer } from "../UI";
 
 export default () => {
   const iconList = [

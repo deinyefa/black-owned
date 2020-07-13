@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
 import { IconFacebook, IconInstagram, IconTwitter } from "../icons";
-import { FlatIcon } from "./UI";
 import {
   BusinessKnownFor,
   BusinessRating,
   BusinessWebsite,
   RelatedBusinessList,
-} from "./UI/Business";
+} from "./Business";
+import { FlatIcon } from "./UI";
 
 const StyledIcon = styled.div`
   max-width: 150px;
