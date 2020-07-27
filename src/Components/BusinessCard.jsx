@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React from "react";
-import { Badge, Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Badge, Card, Modal } from "react-bootstrap";
+import BusinessDetails from "./BusinessDetails";
 import { ScoreThermometer } from "./UI";
 
 const StyledBusinessCard = styled(Card)`
@@ -29,45 +30,48 @@ const StyledArticle = styled.article`
   }
 `;
 
-const BusinessCard = ({
-  rating,
-  ratingCount,
-  name,
-  category,
-  knownFor,
-  onClick,
-}) => {
+const BusinessCard = ({ knownFor, business }) => {
+  const [openDetails, setOpenDetails] = useState(false);
   return (
-    <StyledArticle onClick={onClick} className="shadow">
-      <StyledBusinessCard className="border-0">
-        <Card.Body
-          className="d-flex justify-content-between pt-0"
-          style={{ marginTop: "-1em" }}
-        >
-          <div className="pr-1">
-            <Card.Title>{name}</Card.Title>
-            <Card.Text className="text-primary">{knownFor}</Card.Text>
-            <Card.Text>
-              <Badge variant="info" style={{ textTransform: "uppercase" }}>
-                {category}
-              </Badge>
-            </Card.Text>
-          </div>
-          <div style={{ width: "100px" }}>
-            <ScoreThermometer score={rating} ratingCount={ratingCount} />
-          </div>
-        </Card.Body>
-      </StyledBusinessCard>
-    </StyledArticle>
+    <>
+      <StyledArticle onClick={() => setOpenDetails(true)} className="shadow">
+        <StyledBusinessCard className="border-0">
+          <Card.Body
+            className="d-flex justify-content-between pt-0"
+            style={{ marginTop: "-1em" }}
+          >
+            <div className="pr-1">
+              <Card.Title>{business.name}</Card.Title>
+              <Card.Text className="text-primary">{knownFor}</Card.Text>
+              <Card.Text>
+                <Badge variant="info" style={{ textTransform: "uppercase" }}>
+                  {business.category}
+                </Badge>
+              </Card.Text>
+            </div>
+            <div style={{ width: "100px" }}>
+              <ScoreThermometer
+                score={business.rating}
+                ratingCount={business.ratingCount}
+              />
+            </div>
+          </Card.Body>
+        </StyledBusinessCard>
+      </StyledArticle>
+
+      <Modal show={openDetails} onHide={() => setOpenDetails(false)} size="xl">
+        <Modal.Header closeButton className="border-bottom-0" />
+        <Modal.Body>
+          <BusinessDetails business={business} />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 
 export default BusinessCard;
 
 BusinessCard.propTypes = {
-  rating: PropTypes.number.isRequired,
-  ratingCount: PropTypes.any.isRequired,
-  name: PropTypes.string,
   knownFor: PropTypes.string,
-  category: PropTypes.string,
+  business: PropTypes.object,
 };

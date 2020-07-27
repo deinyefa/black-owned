@@ -8,7 +8,7 @@ import {
 } from "../../icons";
 import { FlatIcon, ScoreThermometer } from "../UI";
 
-export default () => {
+export default ({ rating, ratingCount }) => {
   const iconList = [
     <IconVerySad />,
     <IconSad />,
@@ -49,9 +49,9 @@ export default () => {
   return (
     <>
       <div className="d-flex justify-content-center mb-1">
-        {iconHTML(iconList, 5)}
+        {iconHTML(iconList, rating)}
       </div>
-      <ScoreThermometer score={5} ratingCount={20} />
+      <ScoreThermometer score={rating} ratingCount={ratingCount} />
     </>
   );
 };

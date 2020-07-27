@@ -9,13 +9,17 @@ const Icon = styled.div`
   height: 50px;
 `;
 
-export default () => {
+export default ({ business }) => {
   return (
     <article className="d-flex mb-4">
       <Icon />
       <div>
-        <p className="mb-1">Business Name</p>
-        <ScoreThermometer score={8} ratingCount={1} textRight={false} />
+        <p className="mb-1">{business.name}</p>
+        <ScoreThermometer
+          score={business.rating}
+          ratingCount={business.ratingCount}
+          textRight={false}
+        />
       </div>
     </article>
   );

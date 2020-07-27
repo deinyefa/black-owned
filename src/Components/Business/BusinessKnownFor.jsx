@@ -8,20 +8,13 @@ import {
 } from "../../icons";
 import { FlatIcon } from "../UI";
 
-const knownFor = [
-  "Quality Products",
-  "Fast Delivery",
-  "Sweet Packaging",
-  "Affordable",
-  "Green",
-];
-
-export default () => {
+export default ({ knownFor }) => {
   return (
     <>
       <h3 className="text-uppercase text-muted h6 mt-4 mb-3">Known for</h3>
-      {knownFor.map((k) => {
+      {knownFor.map((kFor) => {
         let icon;
+        const k = kFor.value;
         switch (k) {
           case "Quality Products":
             icon = <IconDiamond />;
@@ -35,7 +28,7 @@ export default () => {
           case "Sweet Packaging":
             icon = <IconShoppingBag />;
             break;
-          case "Green":
+          case "Clean Ingredients":
             icon = <IconSalad />;
             break;
           default:

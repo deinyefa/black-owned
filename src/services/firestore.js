@@ -19,3 +19,7 @@ export const authenticateAnonymously = () =>
 export const getBusinesses = () => {
   return db.collection("businesses").get();
 };
+
+export const getRelatedBusinesses = (search, operand, value) => {
+  return db.collection("businesses").where(search, operand, value).get();
+};

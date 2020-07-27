@@ -36,7 +36,8 @@ const StyledHR = styled.hr`
   margin: 3rem 0;
 `;
 
-export default () => {
+export default ({ business, ...props }) => {
+  console.log(business);
   return (
     <>
       <Container>
@@ -45,15 +46,12 @@ export default () => {
             <StyledIcon />
           </Col>
           <Col>
-            <h1>Business Name</h1>
+            <h1>{business.name}</h1>
             <p className="lead">
               Sociis natoque penatibus et magnis dis parturient.
             </p>
-            <Badge variant="info" className="mr-2 text-uppercase">
-              Fashion
-            </Badge>
             <Badge variant="info" className="text-uppercase">
-              Clothing
+              {business.category}
             </Badge>
           </Col>
         </Row>
@@ -83,13 +81,19 @@ export default () => {
             </Card>
           </Col>
           <Col lg="3" className="mt-lg-0 mt-sm-5">
-            <BusinessRating />
+            <BusinessRating
+              rating={business.rating}
+              ratingCount={business.ratingCount}
+            />
             <StyledHR />
-            <BusinessKnownFor />
+            <BusinessKnownFor knownFor={business.knownFor} />
             <StyledHR />
-            <BusinessWebsite />
+            <BusinessWebsite website={business.website} />
             <StyledHR />
-            <RelatedBusinessList />
+            <RelatedBusinessList
+              category={business.category}
+              uid={business.uid}
+            />
           </Col>
         </Row>
       </Container>
