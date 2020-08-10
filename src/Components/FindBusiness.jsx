@@ -25,17 +25,6 @@ export const FindBusiness = () => {
         .then((querySnapshot) => {
           let data = [];
           querySnapshot.forEach((doc) => {
-            // find business logo
-            // let downloadURL = "";
-            // const imageRef = FirestoreService.storageRef.child(
-            //   `${doc.id}/logo.jpg`
-            // );
-
-            // imageRef
-            //   .getDownloadURL()
-            //   .then((url) => (downloadURL = url))
-            //   .catch((err) => console.log(err));
-
             data.push({
               uid: doc.id,
               ...doc.data(),
@@ -57,7 +46,7 @@ export const FindBusiness = () => {
         </Placeholder>
       </SearchFilter>
       <Container style={{ marginTop: "-4em" }}>
-        <Row xs={1} sm={2} md={3} xl={4}>
+        <Row xs={2} md={3} xl={4}>
           <BusinessList businesses={businesses} />
         </Row>
       </Container>

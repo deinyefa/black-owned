@@ -13,8 +13,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
+const storage = firebase.storage();
 
-export const storageRef = firebase.storage().ref();
+export const getBusinessImages = (uid) => storage.ref().child(uid).listAll();
 
 export const authenticateAnonymously = () =>
   firebase.auth().signInAnonymously();

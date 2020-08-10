@@ -22,7 +22,7 @@ export default ({ category, uid }) => {
     getBusinesses();
   }, [category, uid]);
 
-  console.log(businesses);
+  // console.log(businesses);
   return (
     !!businesses.length && (
       <>

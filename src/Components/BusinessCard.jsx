@@ -38,7 +38,6 @@ const StyledArticle = styled.article`
 
 const BusinessCard = ({ knownFor, business }) => {
   const [openDetails, setOpenDetails] = useState(false);
-  console.log(business);
   return (
     <>
       <StyledArticle onClick={() => setOpenDetails(true)} className="shadow">

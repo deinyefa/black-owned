@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
 import { IconFacebook, IconInstagram, IconTwitter } from "../icons";
+import * as FirestoreService from "../services/firestore";
 import {
   BusinessKnownFor,
   BusinessRating,
@@ -42,8 +43,43 @@ const StyledHR = styled.hr`
   margin: 3rem 0;
 `;
 
-export default ({ business, ...props }) => {
-  console.log(business);
+export default ({ business }) => {
+  const [businessImages, setBusinessImages] = useState([]);
+
+  useEffect(() => {
+    const getImages = () => {
+      FirestoreService.getBusinessImages(business.uid)
+        .then((res) => {
+          let downloadArr = [];
+          res.items.forEach((itemRef) => {
+            itemRef
+              .getDownloadURL()
+              .then((url) => {
+                downloadArr.push(url);
+              })
+              .catch((error) =>
+                console.log(
+                  "Something went wrong fetching the download url for this image",
+                  error
+                )
+              );
+          });
+
+          Promise.resolve(downloadArr)
+            .then((res) => console.log(res))
+            .catch((error) => console.log(error));
+          // setBusinessImages(Promise.resolve(downloadArr));
+        })
+        .catch((error) =>
+          console.log(
+            "Something went wrong fetching the images associated with this business",
+            error
+          )
+        );
+    };
+    getImages();
+  }, [business.uid]);
+
   return (
     <>
       <Container>
