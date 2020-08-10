@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import * as FirestoreService from "../services/firestore";
-import BusinessCard from "./BusinessCard";
+import BusinessList from "./BusinessList";
 
 const SearchFilter = styled.div`
   padding: 5em 0 8em;
@@ -16,10 +16,6 @@ const Placeholder = styled.p`
   padding-bottom: 5px;
 `;
 
-const StyledCol = styled(Col)`
-  max-width: 500px;
-`;
-
 export const FindBusiness = () => {
   const [businesses, setBusinesses] = useState();
 
@@ -29,8 +25,23 @@ export const FindBusiness = () => {
         .then((querySnapshot) => {
           let data = [];
           querySnapshot.forEach((doc) => {
-            data.push({ uid: doc.id, ...doc.data() });
+            // find business logo
+            // let downloadURL = "";
+            // const imageRef = FirestoreService.storageRef.child(
+            //   `${doc.id}/logo.jpg`
+            // );
+
+            // imageRef
+            //   .getDownloadURL()
+            //   .then((url) => (downloadURL = url))
+            //   .catch((err) => console.log(err));
+
+            data.push({
+              uid: doc.id,
+              ...doc.data(),
+            });
           });
+
           setBusinesses(data);
         })
         .catch(() => "Error getting list");
@@ -47,22 +58,7 @@ export const FindBusiness = () => {
       </SearchFilter>
       <Container style={{ marginTop: "-4em" }}>
         <Row xs={1} sm={2} md={3} xl={4}>
-          {/* TODO: Extract this into another compnent <BusinessList/> */}
-          {businesses?.length &&
-            businesses.map((business) => {
-              const mostKnownFor = business.knownFor.reduce((prev, current) =>
-                prev.y > current.y ? prev : current
-              );
-
-              return (
-                <StyledCol key={business.uid}>
-                  <BusinessCard
-                    business={business}
-                    knownFor={mostKnownFor.value}
-                  />
-                </StyledCol>
-              );
-            })}
+          <BusinessList businesses={businesses} />
         </Row>
       </Container>
     </>

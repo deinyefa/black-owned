@@ -13,7 +13,13 @@ const StyledBusinessCard = styled(Card)`
     border-radius: 0.25rem;
     border-bottom-right-radius: 80px;
     transform: rotate(10deg) translate(-20px, -40px);
-    background: linear-gradient(45deg, teal, green);
+    background-image: ${(props) =>
+      props.logo
+        ? "url(" + props.logo + ")"
+        : "linear-gradient(45deg, teal, green)"};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 `;
 
@@ -32,10 +38,11 @@ const StyledArticle = styled.article`
 
 const BusinessCard = ({ knownFor, business }) => {
   const [openDetails, setOpenDetails] = useState(false);
+  console.log(business);
   return (
     <>
       <StyledArticle onClick={() => setOpenDetails(true)} className="shadow">
-        <StyledBusinessCard className="border-0">
+        <StyledBusinessCard className="border-0" logo={business.downloadURL}>
           <Card.Body
             className="d-flex justify-content-between pt-0"
             style={{ marginTop: "-1em" }}

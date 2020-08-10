@@ -13,7 +13,13 @@ import { FlatIcon } from "./UI";
 const StyledIcon = styled.div`
   max-width: 150px;
   min-height: 150px;
-  background: linear-gradient(45deg, teal, green);
+  background-image: ${(props) =>
+    props.logo
+      ? "url(" + props.logo + ")"
+      : "linear-gradient(45deg, teal, green)"};
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 0.25rem;
 `;
 
@@ -43,7 +49,7 @@ export default ({ business, ...props }) => {
       <Container>
         <Row>
           <Col lg="3" xl="2" className="d-sm-none d-lg-block">
-            <StyledIcon />
+            <StyledIcon logo={business.downloadURL} />
           </Col>
           <Col>
             <h1>{business.name}</h1>
@@ -57,7 +63,7 @@ export default ({ business, ...props }) => {
         </Row>
         <Row className="mt-3">
           <Col lg="9">
-            <Card className="shadow border-0 p-3">
+            <Card className="shadow border-0 p-3 mb-5">
               <MainAsset />
               <div className="d-flex">
                 {[1, 2, 3, 4].map((el) => (
@@ -79,6 +85,8 @@ export default ({ business, ...props }) => {
                 <FlatIcon icon={<IconTwitter width={30} />} />
               </div>
             </Card>
+            <h3 className="text-uppercase text-muted h6 my-3">Reviews</h3>
+            <Card>swanky review list</Card>
           </Col>
           <Col lg="3" className="mt-lg-0 mt-sm-5">
             <BusinessRating
